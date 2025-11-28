@@ -123,6 +123,9 @@ def create_booking():
 
 @app.route('/api/bookings', methods=['GET'])
 def get_bookings():
+    connection = None
+    cursor = None
+
     try:
         connection = get_db_connection()
         cursor = connection.cursor(dictionary=True)
@@ -146,7 +149,7 @@ def get_bookings():
 
         bookings = cursor.fetchall()
 
-        # Convert date + time to string
+        # Convert datetime/date objects
         for b in bookings:
             b['date'] = str(b['date'])
             b['time'] = str(b['time'])
@@ -157,8 +160,10 @@ def get_bookings():
         return jsonify({"success": False, "error": str(e)}), 400
 
     finally:
-        cursor.close()
-        connection.close()
+        if cursor is not None:
+            cursor.close()
+        if connection is not None:
+            connection.close()
 
 
 
