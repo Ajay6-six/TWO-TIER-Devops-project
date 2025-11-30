@@ -17,7 +17,7 @@ CORS(app)
 # MYSQL CONFIG
 # =====================
 DB_CONFIG = {
-    'host': 'localhost',
+    'host': 'mysql',
     'user': 'root',
     'password': '123456789',
     'database': 'catering_db'
