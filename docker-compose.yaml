@@ -1,27 +1,6 @@
 version: "3.9"
 
 services:
-  backend:
-    build: ./backend
-    container_name: catering_backend
-    ports:
-      - "5000:5000"
-    environment:
-      - DB_HOST=mysql
-      - DB_USER=root
-      - DB_PASSWORD=123456789
-      - DB_NAME=catering_db
-    depends_on:
-      - mysql
-
-  frontend:
-    build: ./frontend
-    container_name: catering_frontend
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
-
   mysql:
     image: mysql:8
     container_name: catering_mysql
@@ -33,6 +12,27 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    container_name: catering_backend
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: 123456789
+      DB_NAME: catering_db
+    depends_on:
+      - mysql
+
+  frontend:
+    build: ./frontend
+    container_name: catering_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
 
 volumes:
   mysql_data:
