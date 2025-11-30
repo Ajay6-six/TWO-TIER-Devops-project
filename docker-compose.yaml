@@ -12,6 +12,11 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 10
+      start_period: 10s
 
   backend:
     build: ./backend
@@ -24,7 +29,8 @@ services:
       DB_PASSWORD: 123456789
       DB_NAME: catering_db
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
   frontend:
     build: ./frontend
