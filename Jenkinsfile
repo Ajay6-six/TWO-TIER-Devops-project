@@ -35,6 +35,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo 'You can add backend API tests or frontend smoke tests here'
+                echo 'blank'
             }
         }
     }

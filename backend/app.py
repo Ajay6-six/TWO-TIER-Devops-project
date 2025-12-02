@@ -14,13 +14,13 @@ app = Flask(__name__, static_folder=FRONTEND_DIR)
 CORS(app)
 
 # =====================
-# MYSQL CONFIG
+# MYSQL CONFIG (Using Docker ENV)
 # =====================
 DB_CONFIG = {
-    'host': 'mysql',
-    'user': 'root',
-    'password': '123456789',
-    'database': 'catering_db'
+    'host': os.getenv('DB_HOST', 'mysql'),
+    'user': os.getenv('DB_USER', 'root'),
+    'password': os.getenv('DB_PASSWORD', '123456789'),
+    'database': os.getenv('DB_NAME', 'catering_db')
 }
 
 def get_db_connection():
@@ -127,7 +127,6 @@ def create_booking():
         ))
 
         connection.commit()
-
         return jsonify({"success": True, "message": "Booking created!", "user_id": user_id}), 201
 
     except Error as e:
@@ -149,7 +148,6 @@ def get_bookings():
 
     try:
         cursor = connection.cursor(dictionary=True)
-
         cursor.execute("""
             SELECT 
                 Bookings.id, Users.name, Users.email, Users.phone,
@@ -198,6 +196,7 @@ def update_status():
             SET status = %s 
             WHERE id = %s
         """, (new_status, booking_id))
+
         connection.commit()
 
         if cursor.rowcount == 0:
@@ -236,7 +235,7 @@ def get_staff():
         connection.close()
 
 # =====================
-# API: Delete a Booking
+# API: Delete Booking
 # =====================
 @app.route('/api/bookings/<int:booking_id>', methods=['DELETE'])
 def delete_booking(booking_id):
@@ -284,6 +283,6 @@ def admin_login():
 # RUN SERVER
 # =====================
 if __name__ == "__main__":
+    # Initialize database before starting server
     init_db()
     app.run(host="0.0.0.0", debug=True, port=5000)
-

@@ -19,7 +19,8 @@ services:
       start_period: 10s
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
     container_name: catering_backend
     ports:
       - "5000:5000"
@@ -33,7 +34,8 @@ services:
         condition: service_healthy
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
     container_name: catering_frontend
     ports:
       - "80:80"
