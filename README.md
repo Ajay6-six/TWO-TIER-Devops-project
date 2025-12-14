@@ -1,5 +1,5 @@
 
-# Project Title
+# 🍽️ Elite Catering Services – Full Stack Web Application
 
 A brief description of what this project does and who it's for
 
