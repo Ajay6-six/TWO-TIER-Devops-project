@@ -147,28 +147,3 @@ Pipeline stages:
 
 **Ajay Krishna**
 DevOps & Cloud Enthusiast
-
-```
-
----
-
-## 🎯 Why This Structure Is Better
-✔ Clean headings  
-✔ No repetition  
-✔ Recruiter-friendly  
-✔ Industry-standard  
-✔ Easy to read in 30 seconds  
-
----
-
-### 🔥 Optional Next Improvements
-If you want, I can:
-- Add **architecture diagram section**
-- Add **badges** (Docker, Jenkins, GitHub)
-- Convert this into a **DevOps portfolio-style README**
-- Align it with your **THREE-TIER project README**
-
-Just tell me 👍
-```
-
-
